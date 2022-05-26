@@ -25,11 +25,11 @@ router.get('/:id', auth, async(req, res) => {
     try {
         let postId = req.params.id
 
-        let content = await Post.findById(postId)
+        let post = await Post.findById(postId)
 
         return res.json({
             postId: postId,
-            content: content
+            post: post
         })
     } catch (error) {
         console.error(error.message)

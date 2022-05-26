@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { 
-    Grid, 
-    IconButton,
     Button,
     AppBar,
     Box,
@@ -17,10 +15,11 @@ const Nav = (props) => {
 
     return(
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" style={{ padding: '15px 0px 15px 0' }}>
                 <Toolbar>
+                    <img src='cd.png' alt="Castle Digital" width={64} style={{ marginRight: 10 }}/>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Castle Digital CMS
+                        CMS
                     </Typography>
                     {props.showLogin ? 
                         <Button variant="outlined" onClick={props.openLogin} color="inherit">Login</Button>

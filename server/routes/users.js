@@ -18,7 +18,6 @@ router.post('/register',
     check('lastName', 'Last name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Please include a password at least 8 characters long').not().isEmpty().isLength({ min: 8 }),
-    check('contactNumber', 'Contact number is required').exists(),
 ], async (req, res) => {
 
     const errors = validationResult(req);
@@ -26,7 +25,7 @@ router.post('/register',
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { firstName, lastName, email, contactNumber, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     try {
         let user = await User.findOne({ email });
@@ -40,7 +39,6 @@ router.post('/register',
         user = User({
             firstName,
             lastName,
-            contactNumber,
             email,
             password
         });
@@ -63,7 +61,7 @@ router.post('/register',
             { expiresIn: '1h'},
             (err, token) => {
                 if (err) throw err;
-                res.json({ token, msg: 'User registered successfully' });
+                res.json({ token, msg: 'User registered successfully', name: user.firstName + ' ' + user.lastName });
             }
         );
 
